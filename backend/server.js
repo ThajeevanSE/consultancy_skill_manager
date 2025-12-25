@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const db = require('./config/db'); // Import DB connection
 const personnelRoutes = require('./routes/personnelRoutes');
+const skillRoutes = require('./routes/skillRoutes');
 dotenv.config();
 
 const app = express();
@@ -19,8 +20,9 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/personnel', personnelRoutes);
+app.use('/api/skills', skillRoutes);
 
 
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}.....`);
 });

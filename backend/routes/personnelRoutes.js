@@ -4,12 +4,14 @@ const {
   getAllPersonnel, 
   createPersonnel, 
   updatePersonnel, 
-  deletePersonnel 
+  deletePersonnel ,
+  assignSkill
 } = require('../controllers/personnelController');
 
 router.get('/', getAllPersonnel);
 router.post('/', createPersonnel);
 router.put('/:id', updatePersonnel);
 router.delete('/:id', deletePersonnel);
+router.post('/:id/skills', assignSkill);
 
 module.exports = router;
