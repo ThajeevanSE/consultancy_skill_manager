@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const db = require('./config/db'); // Import DB connection
-
+const personnelRoutes = require('./routes/personnelRoutes');
 dotenv.config();
 
 const app = express();
@@ -17,7 +17,10 @@ app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-// Start Server
+// Routes
+app.use('/api/personnel', personnelRoutes);
+
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
