@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const db = require('./config/db'); // Import DB connection
 const personnelRoutes = require('./routes/personnelRoutes');
 const skillRoutes = require('./routes/skillRoutes');
+const projectRoutes = require('./routes/projectRoutes');
+
 dotenv.config();
 
 const app = express();
@@ -21,6 +23,7 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/personnel', personnelRoutes);
 app.use('/api/skills', skillRoutes);
+app.use('/api/projects', projectRoutes);
 
 
 app.listen(PORT, () => {
