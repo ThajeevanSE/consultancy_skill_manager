@@ -51,7 +51,7 @@ const PersonnelList = () => {
     if (window.confirm('Are you sure you want to delete this person?')) {
       try {
         await api.delete(`/personnel/${id}`);
-        fetchPersonnel(); // Refresh list
+        fetchPersonnel(); 
       } catch (err) {
         alert('Error deleting personnel');
       }

@@ -10,7 +10,7 @@ const SkillList = () => {
   });
   const [message, setMessage] = useState('');
 
-  // 1. Fetch Skills on Load
+  //Fetch Skills on Load
   useEffect(() => {
     fetchSkills();
   }, []);
@@ -24,12 +24,12 @@ const SkillList = () => {
     }
   };
 
-  // 2. Handle Input
+  //Handle Input
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 3. Submit Form
+  //Submit Form
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -43,7 +43,7 @@ const SkillList = () => {
     }
   };
 
-  // 4. Delete Skill
+  //Delete Skill
   const handleDelete = async (id) => {
     if (window.confirm('Delete this skill? This will remove it from all personnel and projects.')) {
       try {
