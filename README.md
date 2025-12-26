@@ -15,30 +15,33 @@ A full-stack web application designed for tech consultancies to manage personnel
 
 ### 🌟 Advanced & Creative Features
 
-I went beyond the core requirements to implement **three** strategic features that simulate real-world business intelligence.
+I went beyond the core requirements to implement **strategic features** that simulate real-world business intelligence and enterprise standards.
 
 #### 1. Strategic Insights Dashboard (Visual Analytics)
 * **Problem Solved:** Managers struggle to see the "big picture" of workforce capabilities.
-* **Solution:** A real-time visual dashboard using **Recharts** that provides:
-    * **Workforce Distribution:** Pie chart showing Junior vs. Senior staff ratio.
-    * **Skill Supply Analysis:** Bar chart highlighting the most common skills (identifying hiring strengths).
-    * **Project Status:** Quick view of Active vs. Completed projects.
+* **Solution:** A real-time visual dashboard using **Recharts** that provides workforce distribution, skill supply analysis, and project status overview.
 
 #### 2. Smart Gap Analysis (AI-Simulated Logic)
 * **Problem Solved:** When a project search returns "0 Matches," it usually results in a dead end.
-* **Solution:** An intelligent fallback algorithm that analyzes *why* the match failed. It identifies exactly which skill is the bottleneck and suggests strategic actions (e.g., *"Hiring Recommendation: We lack Senior React Developers"*).
+* **Solution:** An intelligent fallback algorithm that analyzes *why* the match failed. It identifies if the gap is due to a lack of seniority (suggesting **Training**) or a complete lack of the skill (suggesting **Hiring**).
 
 #### 3. Professional PDF Reporting
-* **Problem Solved:** Consultancies need to share staffing proposals with clients, not just view them on a screen.
-* **Solution:** A "Download Report" feature using **jsPDF** that auto-generates a formatted PDF containing the project summary, required skills, and the list of matched candidates (or gap analysis notes).
+* **Solution:** A "Download Report" feature using **jsPDF** that auto-generates a formatted PDF containing the project summary and the list of matched candidates.
+
+#### 4. Secure Authentication (Login System)
+* **Feature:** A secure, token-based (JWT) login system that protects the dashboard. Only authorized administrators can access the data.
+
+#### 5. Dockerized Backend
+* **Feature:** The backend is fully containerized using **Docker**, ensuring consistency across different development environments.
 
 ---
 
 ## 🛠️ Technology Stack
 
 * **Frontend:** React.js, React Router, Axios, Recharts (Charts), jsPDF (Reporting)
-* **Backend:** Node.js, Express.js
+* **Backend:** Node.js, Express.js, JWT (Auth)
 * **Database:** MySQL
+* **DevOps:** Docker
 * **API Testing:** Postman
 
 ---
@@ -49,6 +52,7 @@ Before running the application, ensure you have the following installed:
 * **Node.js** (v14 or higher)
 * **MySQL Server** (v8.0 or higher)
 * **Git**
+* **Docker Desktop** (Optional, for containerized backend)
 
 ---
 
@@ -59,8 +63,11 @@ Before running the application, ensure you have the following installed:
 2.  Create the database and tables by running the provided SQL script:
     * File: `schema.sql` (located in the root directory).
 3.  Ensure the database `consultancy_db` is created successfully.
+4.  **Important:** The script creates a default admin user.
+    * **Email:** `admin@consultancy.com`
+    * **Password:** `admin123`
 
-### 2. Backend Setup
+### 2. Backend Setup (Local)
 1.  Navigate to the backend folder:
     ```bash
     cd backend
@@ -70,22 +77,24 @@ Before running the application, ensure you have the following installed:
     npm install
     ```
 3.  Configure Environment Variables:
-    * Create a `.env` file in the `backend` folder.
-    * Add your database credentials:
-        ```env
-        PORT=5000
-        DB_HOST=localhost
-        DB_USER=root
-        DB_PASSWORD=your_password_here
-        DB_NAME=consultancy_db
-        ```
+    * Create a `.env` file in the `backend` folder with your DB credentials.
 4.  Start the Server:
     ```bash
     npm run dev
     ```
-    * *Server should run on http://localhost:5000*
 
-### 3. Frontend Setup
+### 3. Backend Setup (Docker 🐳)
+Alternatively, you can run the backend in a container:
+1.  Build the image:
+    ```bash
+    docker build -t consultancy-backend .
+    ```
+2.  Run the container:
+    ```bash
+    docker run -p 5000:5000 --env-file .env consultancy-backend
+    ```
+
+### 4. Frontend Setup
 1.  Open a new terminal and navigate to the frontend folder:
     ```bash
     cd frontend
@@ -103,6 +112,14 @@ Before running the application, ensure you have the following installed:
 ---
 
 ## 🖥️ Application Screenshots (Frontend UI)
+
+<div align="center">
+  <h3>🔒 Secure Login Page</h3>
+  <img width="960" height="476" alt="Screenshot 2025-12-26 203038" src="https://github.com/user-attachments/assets/1a551d5a-6b50-4276-aaf2-27aa1e4be7ff" />
+  <p><em>Token-based authentication protecting the dashboard</em></p>
+</div>
+
+<br>
 
 <table width="100%">
   <tr>
@@ -172,39 +189,44 @@ Before running the application, ensure you have the following installed:
   <strong>5. Matching Algorithm Result (GET)</strong><br>
   <img src="https://github.com/user-attachments/assets/2d8b8e60-1292-4f5d-9bea-249b75e71850" width="70%" alt="Matching Result">
 </div>
+
 ---
 
 ## 🧪 How to Test the Advanced Features
 
-### Test 1: The Matching Algorithm
-1.  **Create a Skill:** Go to the "Skills" page and add "React" (Category: Frontend).
-2.  **Create a Person:** Go to "Personnel", add "John Doe", then click "Manage Skills" and assign him "React" at "Advanced" level.
-3.  **Create a Project:** Go to "Projects", create "New App".
-4.  **Add Requirement:** Click "Manage Matches", add a requirement for "React" (Level: Intermediate).
-5.  **Result:** John Doe will appear in the "Suggested Team Members" list automatically.
+### Test 1: Authentication
+1.  Open the app. You will be redirected to the Login Screen.
+2.  Enter Email: `admin@consultancy.com` / Password: `admin123`.
+3.  **Result:** Successful redirection to the Dashboard.
 
-### Test 2: PDF Generation
-1.  While viewing the Project Matches from Test 1, click the red **"📄 Download PDF Report"** button.
-2.  **Result:** A PDF file will download containing the project details and John Doe's information in a table.
+### Test 2: The Matching Algorithm
+1.  **Create a Project:** Go to "Projects", create "New App".
+2.  **Add Requirement:** Click "Manage Matches", add a requirement for "React" (Level: Intermediate).
+3.  **Result:** Qualified personnel appear in the "Suggested Team Members" list automatically.
 
-### Test 3: Gap Analysis
-1.  Create a new requirement for a skill nobody has (e.g., "AI Expert" at "Expert" level).
-2.  **Result:** The matches list will disappear, and a yellow **"Gap Analysis Report"** will appear, suggesting that you need to hire an AI Expert.
+### Test 3: PDF Generation
+1.  While viewing the Project Matches, click the red **"📄 Download PDF Report"** button.
+2.  **Result:** A PDF file downloads containing the project details and matched candidates.
+
+### Test 4: Gap Analysis
+1.  Create a new requirement for a skill nobody has (e.g., "AI Expert").
+2.  **Result:** The matches list disappears, and a yellow **"Gap Analysis Report"** appears, providing strategic hiring advice.
 
 ---
 
 ## 📂 Folder Structure
 
-consultancy-manager 
-│ 
-
+/consultancy-manager 
+│
 ├── /backend # Node.js/Express Server 
-│ 
-├── /config # DB Connection 
+
+│ ├── /config # DB Connection 
 
 │ ├── /controllers # Route Logic 
 
 │ ├── /routes # API Endpoints 
+
+│ ├── Dockerfile # Docker Configuration 
 
 │ └── server.js # Entry Point 
 
@@ -214,15 +236,14 @@ consultancy-manager
 
 │ │ ├── /components # Reusable UI (Navbar) 
 
-│ │ ├── /pages # Main Views (Dashboard, Lists) 
+│ │ ├── /pages # Main Views (Dashboard, Lists, Login) 
 
-│ │ └── /services # Axios Configuration 
+│ │ └── /services # Axios Configuration & PDF Generator 
 
 │ ├── schema.sql # Database Creation Script 
 
 └── README.md # Project Documentation
 
 
-
 **Author:** Thajeevan  
-**Submission Date:** January 7, 2026
+**Submission Date:** December 26, 2026
