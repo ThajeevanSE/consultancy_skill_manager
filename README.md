@@ -1,0 +1,140 @@
+# Consultancy Skill & Project Manager
+
+A full-stack web application designed for tech consultancies to manage personnel, track skills, and intelligently match employees to projects based on skill requirements and proficiency levels.
+
+##  Features
+
+### Core Functionality
+* **Personnel Management:** CRUD operations for employees, including roles and experience levels.
+* **Skill Catalog:** Manage a centralized database of technical and soft skills.
+* **Skill Assignment:** Link skills to personnel with specific proficiency levels (Beginner to Expert).
+* **Project Management:** Create projects with start/end dates and status tracking.
+* **Smart Matching Algorithm:** Automatically suggests the best team members for a project by comparing project requirements against employee skills and proficiency levels.
+
+###  Additional Creative Feature: Strategic Insights Dashboard
+* **Problem Solved:** Managers often struggle to see the "big picture" of their workforce's capabilities and project utilization.
+* **Solution:** A real-time visual dashboard using **Recharts** that provides:
+    * **Workforce Distribution:** Pie chart showing the ratio of Junior vs. Senior staff.
+    * **Skill Supply Analysis:** Bar chart highlighting the most common skills in the company (helping identify hiring needs).
+    * **Project Status Overview:** Quick view of Active vs. Completed projects.
+* **Why it matters:** This transforms the app from a simple data entry tool into a strategic decision-making platform.
+
+---
+
+##  Technology Stack
+
+* **Frontend:** React.js, React Router, Axios, Recharts (for visualization)
+* **Backend:** Node.js, Express.js
+* **Database:** MySQL
+* **API Testing:** Postman
+
+---
+
+##  Prerequisites
+
+Before running the application, ensure you have the following installed:
+* **Node.js** (v14 or higher)
+* **MySQL Server** (v8.0 or higher)
+* **Git**
+
+---
+
+## ⚙️ Setup & Installation Guide
+
+### 1. Database Setup
+1.  Open your MySQL Workbench or Command Line.
+2.  Create the database and tables by running the provided SQL script:
+    * File: `schema.sql` (located in the root directory).
+3.  Ensure the database `consultancy_db` is created successfully.
+
+### 2. Backend Setup
+1.  Navigate to the backend folder:
+    ```bash
+    cd backend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Configure Environment Variables:
+    * Create a `.env` file in the `backend` folder.
+    * Add your database credentials:
+        ```env
+        PORT=5000
+        DB_HOST=localhost
+        DB_USER=root
+        DB_PASSWORD=your_password_here
+        DB_NAME=consultancy_db
+        ```
+4.  Start the Server:
+    ```bash
+    npm run dev
+    ```
+    * *Server should run on http://localhost:5000*
+
+### 3. Frontend Setup
+1.  Open a new terminal and navigate to the frontend folder:
+    ```bash
+    cd frontend
+    ```
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
+3.  Start the React App:
+    ```bash
+    npm start
+    ```
+    * *App should open at http://localhost:3000*
+
+---
+
+## 📸 API Testing Screenshots
+
+*(Note: These are required proofs of functionality)*
+
+### 1. Create Personnel (POST)
+![Create Personnel](path/to/screenshot1.png)
+
+### 2. Get All Personnel (GET)
+![Get Personnel](path/to/screenshot2.png)
+
+### 3. Update Skill (PUT)
+![Update Skill](path/to/screenshot3.png)
+
+### 4. Assign Skill to Personnel (POST)
+![Assign Skill](path/to/screenshot4.png)
+
+### 5. Matching Algorithm Result (GET)
+![Matching Algorithm](path/to/screenshot5.png)
+
+---
+
+## 🧪 How to Test the Matching Feature
+1.  **Create a Skill:** Go to the "Skills" page and add "React" (Category: Frontend).
+2.  **Create a Person:** Go to "Personnel", add "John Doe", then click "Manage Skills" and assign him "React" at "Advanced" level.
+3.  **Create a Project:** Go to "Projects", create "New App".
+4.  **Add Requirement:** Click "Manage Matches", add a requirement for "React" (Level: Intermediate).
+5.  **See Result:** John Doe will appear in the "Suggested Team Members" list automatically.
+
+---
+
+## 📂 Folder Structure
+
+/consultancy-manager │ 
+├── /backend # Node.js/Express Server 
+│ ├── /config # DB Connection 
+│ ├── /controllers # Route Logic 
+│ ├── /routes # API Endpoints 
+│ └── server.js # Entry Point 
+│ ├── /frontend # React Application 
+│ ├── /src 
+│ │ ├── /components # Reusable UI (Navbar) 
+│ │ ├── /pages # Main Views (Dashboard, Lists) 
+│ │ └── /services # Axios Configuration 
+│ ├── schema.sql # Database Creation Script 
+└── README.md # Project Documentation
+
+
+**Author:** Thajeevan  
+**Submission Date:** January 7, 2026
