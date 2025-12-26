@@ -94,19 +94,23 @@ Before running the application, ensure you have the following installed:
 *(Note: These are required proofs of functionality)*
 
 ### 1. Create Personnel (POST)
-![Create Personnel](path/to/screenshot1.png)
+<img width="622" height="509" alt="Screenshot 2025-12-25 174804" src="https://github.com/user-attachments/assets/d76ce229-b164-425d-88de-1f5ce10952d5" />
+
 
 ### 2. Get All Personnel (GET)
-![Get Personnel](path/to/screenshot2.png)
+<img width="622" height="507" alt="Screenshot 2025-12-25 174914" src="https://github.com/user-attachments/assets/2b4f77df-51df-42c5-b8d9-8c02d672414f" />
+
 
 ### 3. Update Skill (PUT)
-![Update Skill](path/to/screenshot3.png)
+<img width="626" height="507" alt="Screenshot 2025-12-25 180342" src="https://github.com/user-attachments/assets/0d8d90ee-ee76-4bdb-8c45-0c07b4135c7a" />
+
 
 ### 4. Assign Skill to Personnel (POST)
-![Assign Skill](path/to/screenshot4.png)
+<img width="618" height="503" alt="Screenshot 2025-12-25 184141" src="https://github.com/user-attachments/assets/b87814db-437a-454f-a5dc-a5454ac33123" />
 
 ### 5. Matching Algorithm Result (GET)
-![Matching Algorithm](path/to/screenshot5.png)
+<img width="625" height="506" alt="Screenshot 2025-12-26 005132" src="https://github.com/user-attachments/assets/2d8b8e60-1292-4f5d-9bea-249b75e71850" />
+
 
 ---
 
