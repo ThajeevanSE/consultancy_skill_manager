@@ -120,7 +120,7 @@ Before running the application, ensure you have the following installed:
 
 ## 📸 API Testing Screenshots
 
-*(Note: These are required proofs of functionality)*
+
 
 ### 1. Create Personnel (POST)
 <img width="622" height="509" alt="Screenshot 2025-12-25 174804" src="https://github.com/user-attachments/assets/d76ce229-b164-425d-88de-1f5ce10952d5" />

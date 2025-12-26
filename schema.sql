@@ -1,8 +1,8 @@
--- Create the Database
+--Create the Database
 CREATE DATABASE IF NOT EXISTS consultancy_db;
 USE consultancy_db;
 
--- 1. Personnel Table
+--Personnel Table
 CREATE TABLE IF NOT EXISTS personnel (
     person_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS personnel (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 2. Skills Table
+--Skills Table
 CREATE TABLE IF NOT EXISTS skills (
     skill_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL UNIQUE,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS skills (
     description TEXT
 );
 
--- 3. Personnel_Skills (Junction Table for assignments)
+-- Personnel_Skills (Junction Table for assignments)
 CREATE TABLE IF NOT EXISTS personnel_skills (
     person_id INT,
     skill_id INT,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS personnel_skills (
     FOREIGN KEY (skill_id) REFERENCES skills(skill_id) ON DELETE CASCADE
 );
 
--- 4. Projects Table
+-- Projects Table
 CREATE TABLE IF NOT EXISTS projects (
     project_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS projects (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 5. Project_Skills (Junction Table for requirements)
+--Project_Skills (Junction Table for requirements)
 CREATE TABLE IF NOT EXISTS project_skills (
     project_id INT,
     skill_id INT,
@@ -51,7 +51,14 @@ CREATE TABLE IF NOT EXISTS project_skills (
     FOREIGN KEY (skill_id) REFERENCES skills(skill_id) ON DELETE CASCADE
 );
 
--- Optional: Insert some dummy data to test immediately
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+-- Insert an admin user (for testing purposes)
+INSERT INTO users (email, password) VALUES ('admin@consultancy.com', 'admin123');
+Insert some dummy data to test immediately
 INSERT INTO skills (name, category, description) VALUES 
 ('React', 'Frontend', 'JS Library'),
 ('Node.js', 'Backend', 'JS Runtime'),

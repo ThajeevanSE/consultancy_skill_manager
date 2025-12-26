@@ -6,6 +6,7 @@ const personnelRoutes = require('./routes/personnelRoutes');
 const skillRoutes = require('./routes/skillRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 const reportRoutes = require('./routes/reportRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.get('/', (req, res) => {
 });
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/personnel', personnelRoutes);
 app.use('/api/skills', skillRoutes);
 app.use('/api/projects', projectRoutes);

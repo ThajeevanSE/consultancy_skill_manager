@@ -10,7 +10,6 @@ const SkillList = () => {
   });
   const [message, setMessage] = useState('');
 
-  //Fetch Skills on Load
   useEffect(() => {
     fetchSkills();
   }, []);
@@ -24,26 +23,23 @@ const SkillList = () => {
     }
   };
 
-  //Handle Input
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  //Submit Form
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
       await api.post('/skills', formData);
       setMessage('Skill Added Successfully!');
-      setFormData({ name: '', category: '', description: '' }); // Reset
-      fetchSkills(); // Refresh
+      setFormData({ name: '', category: '', description: '' }); 
+      fetchSkills(); 
       setTimeout(() => setMessage(''), 3000);
     } catch (err) {
       setMessage('Error adding skill. Name might be duplicate.');
     }
   };
 
-  //Delete Skill
   const handleDelete = async (id) => {
     if (window.confirm('Delete this skill? This will remove it from all personnel and projects.')) {
       try {
@@ -55,67 +51,228 @@ const SkillList = () => {
     }
   };
 
-  // Consistent Styles
   const styles = {
-    container: { maxWidth: '800px', margin: '0 auto' },
-    form: { display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px', padding: '20px', background: '#e9ecef', borderRadius: '5px' },
-    input: { padding: '8px', fontSize: '16px' },
-    button: { padding: '10px', background: '#007bff', color: '#fff', border: 'none', cursor: 'pointer' },
-    deleteBtn: { background: '#dc3545', color: '#fff', border: 'none', padding: '5px 10px', cursor: 'pointer' },
-    table: { width: '100%', borderCollapse: 'collapse', marginTop: '20px' },
-    th: { background: '#333', color: '#fff', padding: '10px', textAlign: 'left' },
-    td: { borderBottom: '1px solid #ddd', padding: '10px' }
+    container: { 
+        maxWidth: '900px', 
+        margin: '0 auto', 
+        padding: '40px 20px',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+        color: '#1F2937'
+    },
+    header: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: '30px'
+    },
+    title: {
+        fontSize: '1.8rem',
+        fontWeight: '700',
+        color: '#111827',
+        letterSpacing: '-0.025em'
+    },
+    // Form Styles
+    formCard: { 
+        background: '#ffffff', 
+        padding: '25px', 
+        borderRadius: '12px', 
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        marginBottom: '40px',
+        border: '1px solid #E5E7EB'
+    },
+    formTitle: {
+        fontSize: '1.1rem',
+        fontWeight: '600',
+        marginBottom: '20px',
+        color: '#374151',
+        borderBottom: '1px solid #F3F4F6',
+        paddingBottom: '10px'
+    },
+    formGrid: {
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '20px',
+        marginBottom: '15px'
+    },
+    inputGroup: {
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '6px'
+    },
+    label: {
+        fontSize: '0.85rem',
+        fontWeight: '500',
+        color: '#6B7280'
+    },
+    input: { 
+        padding: '10px 12px', 
+        fontSize: '0.95rem', 
+        border: '1px solid #D1D5DB', 
+        borderRadius: '6px',
+        outline: 'none',
+        transition: 'border-color 0.2s',
+        width: '100%',
+        boxSizing: 'border-box'
+    },
+    button: { 
+        padding: '10px 24px', 
+        background: '#4F46E5', 
+        color: '#fff', 
+        border: 'none', 
+        borderRadius: '6px', 
+        cursor: 'pointer', 
+        fontWeight: '600',
+        alignSelf: 'flex-start',
+        transition: 'background 0.2s'
+    },
+    // Table Styles
+    tableContainer: {
+        background: '#ffffff',
+        borderRadius: '12px',
+        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+        overflow: 'hidden',
+        border: '1px solid #E5E7EB'
+    },
+    table: { 
+        width: '100%', 
+        borderCollapse: 'collapse', 
+        textAlign: 'left'
+    },
+    th: { 
+        background: '#F9FAFB', 
+        color: '#6B7280', 
+        padding: '16px 24px', 
+        fontSize: '0.75rem', 
+        fontWeight: '700', 
+        textTransform: 'uppercase', 
+        letterSpacing: '0.05em',
+        borderBottom: '1px solid #E5E7EB'
+    },
+    td: { 
+        padding: '16px 24px', 
+        borderBottom: '1px solid #F3F4F6',
+        color: '#111827',
+        fontSize: '0.95rem'
+    },
+    categoryBadge: {
+        background: '#EEF2FF',
+        color: '#4338CA',
+        padding: '4px 10px',
+        borderRadius: '20px',
+        fontSize: '0.75rem',
+        fontWeight: '600',
+        display: 'inline-block',
+        border: '1px solid #C7D2FE'
+    },
+    deleteBtn: { 
+        background: 'transparent', 
+        color: '#EF4444', 
+        border: 'none', 
+        cursor: 'pointer',
+        fontSize: '0.9rem',
+        fontWeight: '500',
+        transition: 'color 0.2s'
+    },
+    message: {
+        padding: '10px',
+        background: '#DEF7EC',
+        color: '#03543F',
+        borderRadius: '6px',
+        marginBottom: '20px',
+        fontSize: '0.9rem',
+        border: '1px solid #84E1BC'
+    }
   };
 
   return (
     <div style={styles.container}>
-      <h2>Skill Catalog</h2>
+      <div style={styles.header}>
+        <h2 style={styles.title}>Skill Inventory</h2>
+        <div style={{color: '#6B7280', fontSize: '0.9rem'}}>
+             Total Skills: <strong>{skills.length}</strong>
+        </div>
+      </div>
       
-      {message && <p style={{ color: 'blue' }}>{message}</p>}
+      {message && <div style={styles.message}>✓ {message}</div>}
 
       {/* Add Skill Form */}
-      <form onSubmit={onSubmit} style={styles.form}>
-        <h3>Add New Skill</h3>
-        <input 
-          type="text" name="name" placeholder="Skill Name (e.g. Python)" 
-          value={formData.name} onChange={onChange} required style={styles.input} 
-        />
-        <input 
-          type="text" name="category" placeholder="Category (e.g. Backend)" 
-          value={formData.category} onChange={onChange} style={styles.input} 
-        />
-        <input 
-          type="text" name="description" placeholder="Description (Optional)" 
-          value={formData.description} onChange={onChange} style={styles.input} 
-        />
-        <button type="submit" style={styles.button}>Add Skill</button>
-      </form>
+      <div style={styles.formCard}>
+        <h3 style={styles.formTitle}>Define New Competency</h3>
+        <form onSubmit={onSubmit}>
+            <div style={styles.formGrid}>
+                <div style={styles.inputGroup}>
+                    <label style={styles.label}>Skill Name</label>
+                    <input 
+                        type="text" name="name" placeholder="e.g. React.js" 
+                        value={formData.name} onChange={onChange} required style={styles.input} 
+                    />
+                </div>
+                <div style={styles.inputGroup}>
+                    <label style={styles.label}>Category</label>
+                    <input 
+                        type="text" name="category" placeholder="e.g. Frontend" 
+                        value={formData.category} onChange={onChange} style={styles.input} 
+                    />
+                </div>
+            </div>
+            
+            <div style={{...styles.inputGroup, marginBottom: '20px'}}>
+                <label style={styles.label}>Description (Optional)</label>
+                <input 
+                    type="text" name="description" placeholder="Brief details about this skill..." 
+                    value={formData.description} onChange={onChange} style={styles.input} 
+                />
+            </div>
+            
+            <button type="submit" style={styles.button}>Add Skill to Catalog</button>
+        </form>
+      </div>
 
       {/* Skills Table */}
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.th}>Skill Name</th>
-            <th style={styles.th}>Category</th>
-            <th style={styles.th}>Description</th>
-            <th style={styles.th}>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {skills.map((skill) => (
-            <tr key={skill.skill_id}>
-              <td style={styles.td}><strong>{skill.name}</strong></td>
-              <td style={styles.td}>{skill.category}</td>
-              <td style={styles.td}>{skill.description}</td>
-              <td style={styles.td}>
-                <button onClick={() => handleDelete(skill.skill_id)} style={styles.deleteBtn}>
-                  Delete
-                </button>
-              </td>
+      <div style={styles.tableContainer}>
+        <table style={styles.table}>
+            <thead>
+            <tr>
+                <th style={styles.th}>Skill Name</th>
+                <th style={styles.th}>Category</th>
+                <th style={styles.th}>Description</th>
+                <th style={styles.th}>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+            </thead>
+            <tbody>
+            {skills.length > 0 ? skills.map((skill) => (
+                <tr key={skill.skill_id} style={{ transition: 'background-color 0.2s' }}>
+                    <style>{`tr:hover { background-color: #F9FAFB; }`}</style>
+                    <td style={styles.td}><strong>{skill.name}</strong></td>
+                    <td style={styles.td}>
+                        {skill.category ? (
+                            <span style={styles.categoryBadge}>{skill.category}</span>
+                        ) : (
+                            <span style={{color: '#9CA3AF', fontSize: '0.85rem'}}>—</span>
+                        )}
+                    </td>
+                    <td style={styles.td}>
+                        {skill.description || <span style={{color: '#9CA3AF', fontStyle: 'italic'}}>No description</span>}
+                    </td>
+                    <td style={styles.td}>
+                        <button 
+                            onClick={() => handleDelete(skill.skill_id)} 
+                            style={styles.deleteBtn}
+                        >
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            )) : (
+                <tr>
+                    <td colSpan="4" style={{...styles.td, textAlign: 'center', color: '#9CA3AF'}}>
+                        No skills found. Add your first skill above.
+                    </td>
+                </tr>
+            )}
+            </tbody>
+        </table>
+      </div>
     </div>
   );
 };
