@@ -34,7 +34,7 @@ const Dashboard = () => {
 
   return (
     <div style={styles.container}>
-      <h2>🚀 Consultancy Overview</h2>
+      <h2> Consultancy Overview</h2>
       <p>Real-time insights into your workforce and projects.</p>
 
       <div style={styles.grid}>

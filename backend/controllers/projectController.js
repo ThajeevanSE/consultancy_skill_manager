@@ -49,7 +49,8 @@ const addProjectRequirement = async (req, res) => {
 // @route   GET /api/projects/:id/matches
 const getProjectMatches = async (req, res) => {
   const { id } = req.params; // Project ID
-
+  const [projectInfo] = await db.query('SELECT * FROM projects WHERE project_id = ?', [id]);
+  const projectDetails = projectInfo[0];
   try {
     // 1. Get Project Requirements
     const [requirements] = await db.query(`
@@ -99,10 +100,11 @@ const getProjectMatches = async (req, res) => {
       });
     });
 
-    res.json({ 
+    res.json({
       project_id: id,
+      project: projectDetails,
       required_skills: requirements,
-      matches: matches 
+      matches: matches
     });
 
   } catch (error) {
