@@ -5,6 +5,7 @@ const db = require('./config/db'); // Import DB connection
 const personnelRoutes = require('./routes/personnelRoutes');
 const skillRoutes = require('./routes/skillRoutes');
 const projectRoutes = require('./routes/projectRoutes');
+const reportRoutes = require('./routes/reportRoutes');
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 app.use('/api/personnel', personnelRoutes);
 app.use('/api/skills', skillRoutes);
 app.use('/api/projects', projectRoutes);
+app.use('/api/reports', reportRoutes);
 
 
 app.listen(PORT, () => {
