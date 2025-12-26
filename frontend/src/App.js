@@ -6,6 +6,7 @@ import PersonnelList from './pages/PersonnelList';
 import SkillList from './pages/SkillList';
 import ProjectList from './pages/ProjectList';
 import ProjectDetails from './pages/ProjectDetails';
+import PersonnelSkills from './pages/PersonnelSkills';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/skills" element={<SkillList />} />
             <Route path="/projects" element={<ProjectList />} />
             <Route path="/projects/:id" element={<ProjectDetails />} />
+            <Route path="/personnel/:id" element={<PersonnelSkills />} />
             
           </Routes>
         </div>
